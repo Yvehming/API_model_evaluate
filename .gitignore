@@ -1,0 +1,5 @@
+output_inference_graph_v1.pb/
+pepper_inference_graph_v2.pb/
+pepper_output_inference_graph_v1.pb/
+VOCdevkit/VOC2007/Annotations/*.xml
+VOCdevkit/VOC2007/JPEGImages/*.jpg
