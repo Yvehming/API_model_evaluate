@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     if map_mode == 0 or map_mode == 1:
         print("Load model.")
-        model = tf.saved_model.load("pepper_inference_graph_v2.pb/saved_model")
+        model = tf.saved_model.load("pepper_inference_graph_v3.pb/saved_model")
         pruned_classes = model.prune("image_tensor:0", "detection_classes:0")
         pruned_scores = model.prune("image_tensor:0", "detection_scores:0")
         pruned_boxes = model.prune("image_tensor:0", "detection_boxes:0")
