@@ -41,4 +41,3 @@ if __name__ == "__main__":
     cv2.destroyAllWindows()
 #
 # load_model.predict(image_expanded)
-

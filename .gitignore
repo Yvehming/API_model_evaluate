@@ -7,3 +7,4 @@ pepper_inference_graph_v3.pb/
 map_out/detection-results/*.txt
 map_out/ground-truth/*.txt
 
+map_out/lite_detection-results/

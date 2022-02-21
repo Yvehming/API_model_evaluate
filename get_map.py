@@ -64,6 +64,8 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(map_out_path, 'ground-truth'))
     if not os.path.exists(os.path.join(map_out_path, 'detection-results')):
         os.makedirs(os.path.join(map_out_path, 'detection-results'))
+    if not os.path.exists(os.path.join(map_out_path, 'lite_detection-results')):
+        os.makedirs(os.path.join(map_out_path, 'lite_detection-results'))
     if not os.path.exists(os.path.join(map_out_path, 'images-optional')):
         os.makedirs(os.path.join(map_out_path, 'images-optional'))
 
