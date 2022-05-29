@@ -4,7 +4,7 @@ import numpy as np
 # https://yinguobing.com/load-savedmodel-of-estimator-by-keras/
 # https://tensorflow.google.cn/versions/r2.2/api_docs/python/tf/saved_model/load
 if __name__ == "__main__":
-    load_model = tf.saved_model.load("pepper_inference_graph_v3.pb/saved_model")
+    load_model = tf.saved_model.load("pepper_inference_graph_faster_rcnn.pb/saved_model")
     pruned_classes = load_model.prune("image_tensor:0", "detection_classes:0")
     pruned_scores = load_model.prune("image_tensor:0", "detection_scores:0")
     pruned_boxes = load_model.prune("image_tensor:0", "detection_boxes:0")

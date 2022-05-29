@@ -38,6 +38,7 @@ if __name__ == "__main__":
     #   一般情况下与训练和预测所用的classes_path一致即可
     # -------------------------------------------------------#
     classes_path = 'model_data/pepper_classs.txt'
+    model_path = 'pepper_detect_2cat_0.75mnet.tflite'
     # -------------------------------------------------------#
     #   MINOVERLAP用于指定想要获得的mAP0.x
     #   比如计算mAP0.75，可以设定MINOVERLAP = 0.75。
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     # -------------------------------------------------------#
     #   结果输出的文件夹，默认为map_out
     # -------------------------------------------------------#
-    map_out_path = 'map_out'
+    map_out_path = 'lite_detection-results'
 
     image_ids = open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Main/test.txt")).read().strip().split()
 
@@ -79,9 +80,10 @@ if __name__ == "__main__":
         for image_id in tqdm(image_ids):
             image_path = os.path.join(VOCdevkit_path, "VOC2007/JPEGImages/" + image_id + ".jpg")
             image = cv2.imread(image_path)
+            # image = cv2.GaussianBlur(image, (2, 2), 1)  # 高斯滤波
             # if map_vis:
             #     image.save(os.path.join(map_out_path, "images-optional/" + image_id + ".jpg"))
-            get_map_lite_txt(class_names, image_id, image, map_out_path)
+            get_map_lite_txt(model_path, class_names, image_id, image, map_out_path)
         print("Get predict result done.")
 
     if map_mode == 0 or map_mode == 2:

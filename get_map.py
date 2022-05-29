@@ -11,9 +11,9 @@ from get_map_text import get_map_txt
 from utils.utils import get_classes
 from utils.utils_map import get_coco_map, get_map
 
-gpus = tf.config.experimental.list_physical_devices(device_type='GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+# gpus = tf.config.experimental.list_physical_devices(device_type='CPU')
+#for gpu in gpus:
+#    tf.config.experimental.set_memory_growth(gpu, True)
     
 if __name__ == "__main__":
     '''
@@ -37,6 +37,7 @@ if __name__ == "__main__":
     #   一般情况下与训练和预测所用的classes_path一致即可
     #-------------------------------------------------------#
     classes_path    = 'model_data/pepper_classs.txt'
+    model_path = 'pepper_inference_0.75mnet.pb/saved_model'
     #-------------------------------------------------------#
     #   MINOVERLAP用于指定想要获得的mAP0.x
     #   比如计算mAP0.75，可以设定MINOVERLAP = 0.75。
@@ -64,8 +65,6 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(map_out_path, 'ground-truth'))
     if not os.path.exists(os.path.join(map_out_path, 'detection-results')):
         os.makedirs(os.path.join(map_out_path, 'detection-results'))
-    if not os.path.exists(os.path.join(map_out_path, 'lite_detection-results')):
-        os.makedirs(os.path.join(map_out_path, 'lite_detection-results'))
     if not os.path.exists(os.path.join(map_out_path, 'images-optional')):
         os.makedirs(os.path.join(map_out_path, 'images-optional'))
 
@@ -73,7 +72,7 @@ if __name__ == "__main__":
 
     if map_mode == 0 or map_mode == 1:
         print("Load model.")
-        model = tf.saved_model.load("pepper_inference_graph_v3.pb/saved_model")
+        model = tf.saved_model.load(model_path)
         pruned_classes = model.prune("image_tensor:0", "detection_classes:0")
         pruned_scores = model.prune("image_tensor:0", "detection_scores:0")
         pruned_boxes = model.prune("image_tensor:0", "detection_boxes:0")

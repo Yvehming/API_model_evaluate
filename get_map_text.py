@@ -16,8 +16,8 @@ def get_map_txt(model, class_names, pruned_classes, pruned_scores, pruned_boxes,
     # ---------------------------------------------------------#
     imH, imW, _ = image.shape
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image_resized = cv2.resize(image_rgb, (300, 300))
-    image_expanded = np.expand_dims(image_resized, axis=0)
+    image_expanded = np.expand_dims(image_rgb, axis=0)
+    # image_expanded = np.expand_dims(image_resized, axis=0)
     classes = pruned_classes(tf.constant(image_expanded, dtype=tf.uint8)).numpy()
     scores = pruned_scores(tf.constant(image_expanded, dtype=tf.uint8)).numpy()
     boxes = pruned_boxes(tf.constant(image_expanded, dtype=tf.uint8)).numpy()
@@ -45,14 +45,14 @@ def get_map_txt(model, class_names, pruned_classes, pruned_scores, pruned_boxes,
     f.close()
     return
 
-def get_map_lite_txt( class_names, image_id, image, map_out_path):
+def get_map_lite_txt(model_path, class_names, image_id, image, map_out_path):
     from tflite_runtime.interpreter import Interpreter
-    f = open(os.path.join(map_out_path, "lite_detection-results/" + image_id + ".txt"), "w")
+    f = open(os.path.join(map_out_path, "detection-results/" + image_id + ".txt"), "w")
     # ---------------------------------------------------------#
     #   在这里将图像转换成RGB图像，防止灰度图在预测时报错。
     #   代码仅仅支持RGB图像的预测，所有其它类型的图像都会转化成RGB
     # ---------------------------------------------------------#
-    interpreter = Interpreter(model_path='pepper_detect3.tflite')
+    interpreter = Interpreter(model_path=model_path)
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
