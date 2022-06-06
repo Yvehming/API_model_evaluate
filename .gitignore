@@ -13,3 +13,5 @@ map_out/detection-results/*.txt
 map_out/ground-truth/*.txt
 lite_detection-results/detection-results/*.txt
 lite_detection-results/ground-truth/*.txt
+draw_loss.mat
+draw_map.mat
