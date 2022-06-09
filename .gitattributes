@@ -1,3 +1,1 @@
-*.py linguist-language=python
-*.m linguist-language=matlab
 *.ipynb linguist-language=python
